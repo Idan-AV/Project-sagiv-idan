@@ -32,18 +32,18 @@ class DAL:
                     print(f"Executing query: {query}")
                     if params:
                         print(f"With parameters: {params}")
-                        cursor.execute(query, params)
-                        if fetchall:
-                            result = cursor.fetchall()
-                            print(f"Fetched {len(result)} rows")
-                            return result
-                        elif fetchone:
-                            result = cursor.fetchone()
-                            print(f"Fetched one row")
-                            return result
-                        else:
-                            print(f"query affected {cursor.rowcount} rows")
-                        return cursor
+                    cursor.execute(query, params)
+                    if fetchall:
+                        result = cursor.fetchall()
+                        print(f"Fetched {len(result)} rows")
+                        return result
+                    elif fetchone:
+                        result = cursor.fetchone()
+                        print(f"Fetched one row")
+                        return result
+                    else:
+                        print(f"query affected {cursor.rowcount} rows")
+                    return cursor
 
             except mysql.connector.Error as err:
                 print(f"Error executing query: {query}")
@@ -81,10 +81,10 @@ if __name__ == "__main__":
     with DAL() as dal:
         print("\n===get table example===")
         # countries = dal.get_table("SELECT * FROM countries where population > %s", (0,))
-        countries = dal.get_table("SELECT * FROM countries")
+        countries = dal.get_table("SELECT * FROM project10.countries")
         users = dal.get_table("SELECT * FROM users where age > %s", (25, ))
         
-
+        
         for country in countries:
             print(f"Country name: {country['name']}")
         
