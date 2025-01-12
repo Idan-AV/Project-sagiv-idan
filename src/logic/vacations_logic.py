@@ -83,5 +83,5 @@ if __name__ == "__main__":
                 print(vacation)
     except Exception as err:
         print(f"Error: {err}")
-        print("wow")
+
         # aa aa
