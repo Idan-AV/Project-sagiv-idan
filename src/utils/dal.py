@@ -81,12 +81,12 @@ if __name__ == "__main__":
     with DAL() as dal:
         print("\n===get table example===")
         # countries = dal.get_table("SELECT * FROM countries where population > %s", (0,))
-        countries = dal.get_table("SELECT * FROM project10.countries")
-        users = dal.get_table("SELECT * FROM users where age > %s", (25, ))
+        countries = dal.get_table("SELECT * FROM countries")
+        users = dal.get_table("SELECT * FROM users")
         
         
         for country in countries:
-            print(f"Country name: {country['name']}")
+            print(f"Country name: {country['country_name']}")
         
         for user in users:
-            print(f"User name: {user['name']}, age: {user['age']}")
+            print(f"User name: {user['first_name']}, last name: {user['last_name']}")
