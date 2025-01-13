@@ -31,7 +31,11 @@ class CountryLogic:
         return result if result is not None else []
     
 
-   
+    def check_if_country_exists(self, country_name):
+        
+        query = f"SELECT * from mydb.countries where country_name like '{country_name}'"
+        result = self.dal.get_table(query)
+        return True if result is not None else False
 
 
 
