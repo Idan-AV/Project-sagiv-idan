@@ -29,17 +29,22 @@ class VacationLogic:
         query = "SELECT * from mydb.vacations"
         result = self.dal.get_table(query)
         return result if result is not None else []
+    
+
+   
+
+
 
     def add_vacation(self, title, description, start_date, end_date, countries_name, price, image):
         try:
             query = """
             INSERT INTO mydb.vacations 
-            (title, description, start_date, end_date, countries_id, price, total_likes, image)
+            (title, description, start_date, end_date, price, likes, image, countries_id)
             VALUES 
-            (%s, %s, %s, %s, (SELECT id FROM mydb.countries WHERE country_name LIKE %s), %s, 0, %s)
+            (%s, %s, %s, %s, %s, 0, %s, (SELECT id FROM mydb.countries WHERE country_name LIKE %s))
             """
             params = (title, description, start_date,
-                      end_date, f"%{countries_name}%", price, image)
+                      end_date, price, image, f"%{countries_name}%")
             self.dal.insert(query, params)
             return True
 
@@ -77,11 +82,12 @@ class VacationLogic:
 if __name__ == "__main__":
     try:
         with VacationLogic() as vacation_logic:
+            vacation_logic.add_vacation("Gentle Hotel", "The most gentle hotel for any age", "2025-01-03", "2025-01-09", 'Germany', 9800, "hotel_photo.png")
             vacations = vacation_logic.get_all_vacations()
             for vacation in vacations:
                 print("----------------------")
                 print(vacation)
     except Exception as err:
         print(f"Error: {err}")
-
+        
         # aa aa
